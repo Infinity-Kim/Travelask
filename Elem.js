@@ -1,27 +1,48 @@
 class Elem {
 
     constructor(selector) {
-        this.element = document.querySelector(selector);
+        this.elements = document.querySelectorAll(selector);
+    }
+
+    each(origFunction) {
+        this.elements.forEach(item => {
+            origFunction(item);
+        });
     }
 
     html(text) {
-        this.element.innerHTML = text;
+        let addHtml = elem => {
+            elem.innerHTML = text;
+        };
+
+        this.each(addHtml);
         return this;
     }
 
     attr(name, value) {
-        this.element.setAttribute(name, value);
+        const addAttribute = elem => {
+            elem.setAttribute(name, value);
+        }
+
+        this.each(addAttribute);
         return this;
     }
 
     append(text) {
-        this.element.append(text);
+        const addEnd = elem => {
+            elem.append(text);
+        }
+
+        this.each(addEnd);
         return this;
     }
 
     prepend(text) {
-        this.element.prepend(text);
+        const addBegin = elem => {
+            elem.prepend(text);
+        }
+
+        this.each(addBegin);
         return this;
     }
-
 }
